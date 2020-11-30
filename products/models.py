@@ -1,5 +1,7 @@
+import math
 import uuid
 from io import BytesIO
+from timeit import default_timer as timer
 
 from django.core.files import File
 from django.db import models
@@ -17,7 +19,9 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(blank=True, null=True)
     logo = models.ImageField(upload_to="logos/")
-    rotate_duration = models.DurationField(blank=True, null=True)
+    rotate_duration = models.PositiveIntegerField(
+        blank=True, null=True, help_text="Duration of image rotation in seconds, ceiled"
+    )
 
     class Meta:
         ordering = ("created",)
@@ -27,7 +31,16 @@ class Product(models.Model):
         if self.logo:
             img_file = BytesIO(self.logo.read())
             img = Image.open(img_file)
+
+            start_time = timer()
+
             img = img.rotate(180)
+
+            finish_time = timer()
+            rotation_duration = finish_time - start_time
+            rotation_duration_seconds = math.ceil(rotation_duration)
+            self.rotate_duration = rotation_duration_seconds
+
             extension = self.logo.name.split(".")[-1]
             img.save(buffer, extension)
             buffer.seek(0)
