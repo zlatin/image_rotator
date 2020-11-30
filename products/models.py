@@ -14,11 +14,17 @@ class Product(models.Model):
     """
 
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=255)
-    description = models.TextField(default="")
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(blank=True, null=True)
-    logo = models.ImageField(upload_to="logos/")
+    name = models.CharField(max_length=255, help_text="Name of the product")
+    description = models.TextField(default="", help_text="Product description")
+    created = models.DateTimeField(auto_now_add=True, help_text="Product creation time")
+    updated = models.DateTimeField(
+        blank=True, null=True, help_text="Time of product update"
+    )
+    logo = models.ImageField(
+        blank=True,
+        upload_to="logos/",
+        help_text="Product logo, rotated by 180 degrees on upload",
+    )
     rotate_duration = models.PositiveIntegerField(
         blank=True, null=True, help_text="Duration of image rotation in seconds, ceiled"
     )
