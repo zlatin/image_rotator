@@ -1,7 +1,6 @@
-import datetime
 import json
-from datetime import datetime
 from django.http import response
+from django.utils import timezone
 
 from django.urls import reverse
 from freezegun import freeze_time
@@ -42,10 +41,9 @@ class ProductsCRUDTestCase(APITestCase):
 
     def test_modified_filter_product_been_modified(self):
         product = Product.objects.create(name="test1", description="fat")
-        product.updated = datetime.now()
+        product.updated = timezone.now()
         product.save()
         response = self.client.get("/products/?modified=true")
-        print(response)
         json_response_products = json.loads(response.content)["results"]
         self.assertEqual(len(json_response_products), 1)
 
