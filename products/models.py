@@ -2,6 +2,7 @@ import uuid
 from io import BytesIO
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files import File
 from django.db import models
 from PIL import Image
 import mimetypes
@@ -28,11 +29,10 @@ class Product(models.Model):
             img_file = BytesIO(self.logo.read())
             img = Image.open(img_file) 
             img = img.rotate(180)
-            mime_type = mimetypes.guess_type(self.logo.name)
             extension = self.logo.name.split('.')[-1]
             img.save(buffer, extension)
             buffer.seek(0)
-            self.logo =  InMemoryUploadedFile(buffer,'ImageField', self.logo.name, mime_type, buffer.getbuffer().nbytes, None)
+            self.logo = File(buffer, name=self.logo.name)
 
         
         super(Product, self).save(*args, **kwargs)
