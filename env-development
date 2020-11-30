@@ -1,0 +1,4 @@
+SECRET_KEY='si$m-)&48^%o^cr6#$o!6sp^cxjm8%u!5hv4j_en2uwoa3capi'
+DEBUG=True
+DATABASE_URL=sqlite:///db.sqlite3
+ALLOWED_HOSTS=
