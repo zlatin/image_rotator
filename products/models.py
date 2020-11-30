@@ -1,11 +1,8 @@
-import math
 import uuid
-from io import BytesIO
-from timeit import default_timer as timer
 
-from django.core.files import File
 from django.db import models
-from PIL import Image
+
+from .utils import get_duration, rotate_image
 
 
 class Product(models.Model):
@@ -33,24 +30,12 @@ class Product(models.Model):
         ordering = ("created",)
 
     def save(self, *args, **kwargs) -> None:
-        buffer = BytesIO()
         if self.logo:
-            img_file = BytesIO(self.logo.read())
-            img = Image.open(img_file)
+            rotation_duration_seconds, rotated_image = get_duration(rotate_image)(
+                self.logo, 180
+            )
 
-            start_time = timer()
-
-            img = img.rotate(180)
-
-            finish_time = timer()
-            rotation_duration = finish_time - start_time
-            rotation_duration_seconds = math.ceil(rotation_duration)
             self.rotate_duration = rotation_duration_seconds
-
-            extension = self.logo.name.split(".")[-1]
-            img.save(buffer, extension)
-            buffer.seek(0)
-            self.logo = File(buffer, name=self.logo.name)
+            self.logo = rotated_image
 
         super(Product, self).save(*args, **kwargs)
-        buffer.close()
