@@ -1,16 +1,13 @@
-from django.core.exceptions import ValidationError
-from django.shortcuts import get_object_or_404
-from django.utils.encoding import force_text
+from django.utils import timezone
 from rest_framework import serializers, status
 from rest_framework.exceptions import APIException
-from django.utils import timezone
 
 from .models import Product
 
 
 class AlreadyUpdatedException(APIException):
     status_code = status.HTTP_409_CONFLICT
-    default_detail = 'Product editing allowed only once'
+    default_detail = "Product editing allowed only once"
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -33,5 +30,3 @@ class ProductSerializer(serializers.ModelSerializer):
 
         instance.updated = timezone.now()
         return super().update(instance, validated_data)
-
-        
