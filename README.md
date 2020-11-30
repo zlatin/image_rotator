@@ -6,10 +6,13 @@ Product can only be edited once.
 
 ## Development
 To start development 
-1. Install dependencies with `pipenv install`
+1. Install dependencies with 
+
+       pipenv install
+
 1. copy `env-development` to `.env`. Never use development env settings in production
 
-    cp env-development .env
+       cp env-development .env
 
 To run dev server run
 
