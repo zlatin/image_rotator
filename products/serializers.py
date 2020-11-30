@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.encoding import force_text
 from rest_framework import serializers, status
 from rest_framework.exceptions import APIException
-import datetime
+from django.utils import timezone
 
 from .models import Product
 
@@ -31,7 +31,7 @@ class ProductSerializer(serializers.ModelSerializer):
         if instance.updated:
             raise AlreadyUpdatedException
 
-        instance.updated = datetime.datetime.now()
+        instance.updated = timezone.now()
         return super().update(instance, validated_data)
 
         
