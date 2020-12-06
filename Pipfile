@@ -6,12 +6,16 @@ verify_ssl = true
 [dev-packages]
 black = "*"
 freezegun = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
 
 [packages]
 django = "*"
 djangorestframework = "*"
 pillow = "*"
 django-environ = "*"
+
 
 [requires]
 python_version = "3.9"
