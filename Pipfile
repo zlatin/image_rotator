@@ -25,4 +25,4 @@ allow_prereleases = true
 
 [scripts]
 server = "python3 manage.py runserver"
-test = "python3 manage.py test"
+test = "pytest"
