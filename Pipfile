@@ -9,13 +9,13 @@ freezegun = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
+mixer = "*"
 
 [packages]
 django = "*"
 djangorestframework = "*"
 pillow = "*"
 django-environ = "*"
-
 
 [requires]
 python_version = "3.9"
