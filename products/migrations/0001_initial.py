@@ -8,19 +8,26 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('uuid', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=255)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(blank=True, null=True)),
-                ('logo', models.ImageField(upload_to='logos/')),
-                ('rotate_duration', models.DurationField(blank=True, null=True)),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(blank=True, null=True)),
+                ("logo", models.ImageField(upload_to="logos/")),
+                ("rotate_duration", models.DurationField(blank=True, null=True)),
             ],
         ),
     ]

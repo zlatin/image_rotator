@@ -30,7 +30,7 @@ def rotate_image(image_to_rotate, angle):
     img_name = image_to_rotate.name
     img = img.rotate(angle)
     extension = img_name.split(".")[-1]
-    image_format = 'JPEG' if extension.lower() == 'jpg' else extension.upper()
+    image_format = "JPEG" if extension.lower() == "jpg" else extension.upper()
     buffer = BytesIO()
     img.save(buffer, image_format)
     buffer.seek(0)

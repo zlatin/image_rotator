@@ -49,7 +49,7 @@ class ProductsCRUDTestCase(APITestCase):
 
     def test_patch_updates_updated_field(self):
         product = Product.objects.create(name="test1", description="fat")
-        r = self.client.patch(f'/products/{product.uuid}/', {"name":"redacted"})
+        r = self.client.patch(f"/products/{product.uuid}/", {"name": "redacted"})
         product = json.loads(r.content)
-        self.assertEqual(product['name'], 'redacted')
-        self.assertIsNotNone(product['updated'])
+        self.assertEqual(product["name"], "redacted")
+        self.assertIsNotNone(product["updated"])
