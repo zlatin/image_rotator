@@ -1,7 +1,7 @@
 import pytest
 from products.utils import rotate_image, get_duration
 from PIL import Image, ImageChops
-import shutil
+from .utils import images_eqal
 
 
 def test_image_rotation_by_180():
@@ -9,10 +9,7 @@ def test_image_rotation_by_180():
     expected_image = Image.open("./products/tests/test_data/expected.jpg")
     rotated_image_file = rotate_image(test_file, 180)
     rotated_image = Image.open(rotated_image_file.file)
-    diff = ImageChops.difference(expected_image, rotated_image)
-    test_file.close()
-    assert diff.getbbox() is None
-
+    assert images_eqal(rotated_image, expected_image)
 
 def test_get_duration_returns_tuple_of_int_and_result():
     testfunc = lambda x: x + x

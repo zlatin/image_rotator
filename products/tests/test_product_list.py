@@ -1,7 +1,6 @@
 import json
 
 import pytest
-from django.utils import timezone
 from mixer.backend.django import mixer
 from products.models import Product
 

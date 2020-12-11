@@ -10,6 +10,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
 mixer = "*"
+pytest-freezegun = "*"
 
 [packages]
 django = "*"
