@@ -23,5 +23,6 @@ def test_modified_product_CANNOT_be_modified_again(client, modified_product):
         content_type="application/json",
     )
     assert resp.status_code == 409
-    details = resp.json()["details"]
+
+    details = resp.json()["detail"]
     assert details == "Product editing allowed only once"
