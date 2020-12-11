@@ -31,3 +31,6 @@ For production use copy `env-example` to `.env`.
     cp env-example .env
 
 Edit `.env` file according to your server setup.
+
+## TODO
+- make MEDIA_ROOT as temp dir in tests
